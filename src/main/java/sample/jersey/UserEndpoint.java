@@ -1,14 +1,29 @@
 package sample.jersey;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+/*
+https://stackoverflow.com/questions/34284373/valid-not-working-with-jax-rs-using-spring-boot
+https://no.wikipedia.org/wiki/Liste_over_HTTP-statuskoder
+
+get http://localhost:8080/user?input=test
+post http://localhost:8080/user/registrer/1
+Content-Type application/json
+{
+    "id": 1,
+     "firstName": "12343434",
+    "lastName": "lastName2",
+    "email": "qwqw@sds"
+}
+
+
+ */
 @Component
 @Path("/user")
 public class UserEndpoint {
@@ -23,9 +38,9 @@ public class UserEndpoint {
 	@POST
 	@Consumes("application/json")
 	@Produces("application/json")
-	@Path("/registrer")
-	public Response create(
-			 UserDTO userDTO
+	@Path("/registrer/{navn}")
+	public Response create(@PathParam("navn") @NotNull String navn,
+			@Valid UserDTO userDTO
 			) {
 
 		//@PathParam("navn")
