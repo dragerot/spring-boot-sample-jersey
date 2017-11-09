@@ -27,6 +27,7 @@ public class JerseyConfig extends ResourceConfig {
 		register(Endpoint.class);
 		register(ReverseEndpoint.class);
 		register(UserEndpoint.class);
+	//	property(org.glassfish.jersey.server.ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
 	}
 
 }

@@ -1,6 +1,8 @@
 package sample.jersey;
 
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
@@ -40,8 +42,13 @@ public class UserEndpoint {
 	@Produces("application/json")
 	@Path("/registrer/{navn}")
 	public Response create(@PathParam("navn") @NotNull String navn,
-			@Valid UserDTO userDTO
+			@Valid UserDTO userDTO,
+			BindingResult bindingResult,
+			@Context UriInfo uriInfo
 			) {
+//		if (bindingResult.hasErrors()) {
+//			return Response.ok().entity(bindingResult.getTarget()).build(); // some error code, or however you want to handle validation errors
+//		}
 
 		//@PathParam("navn")
 		//@NotNull String navn,@RequestBody
